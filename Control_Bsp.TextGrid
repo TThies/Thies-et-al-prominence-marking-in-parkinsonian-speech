@@ -1,0 +1,112 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 2.5683207585408354 
+tiers? <exists> 
+size = 5 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "word" 
+        xmin = 0 
+        xmax = 2.5683207585408354 
+        intervals: size = 4 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.825781297046916 
+            text = "" 
+        intervals [2]:
+            xmin = 0.825781297046916 
+            xmax = 1.2310019514995645 
+            text = "braune" 
+        intervals [3]:
+            xmin = 1.2310019514995645 
+            xmax = 1.63486226383489 
+            text = "Wade" 
+        intervals [4]:
+            xmin = 1.63486226383489 
+            xmax = 2.5683207585408354 
+            text = "" 
+    item [2]:
+        class = "IntervalTier" 
+        name = "part-of-speech" 
+        xmin = 0 
+        xmax = 2.5683207585408354 
+        intervals: size = 4 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.825781297046916 
+            text = "" 
+        intervals [2]:
+            xmin = 0.825781297046916 
+            xmax = 1.2310019514995645 
+            text = "adjective" 
+        intervals [3]:
+            xmin = 1.2310019514995645 
+            xmax = 1.63486226383489 
+            text = "noun" 
+        intervals [4]:
+            xmin = 1.63486226383489 
+            xmax = 2.5683207585408354 
+            text = "" 
+    item [3]:
+        class = "IntervalTier" 
+        name = "seg" 
+        xmin = 0 
+        xmax = 2.5683207585408354 
+        intervals: size = 6 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.2310019514995645 
+            text = "" 
+        intervals [2]:
+            xmin = 1.2310019514995645 
+            xmax = 1.334656196203298 
+            text = "C1" 
+        intervals [3]:
+            xmin = 1.334656196203298 
+            xmax = 1.5299422381713725 
+            text = "V1" 
+        intervals [4]:
+            xmin = 1.5299422381713725 
+            xmax = 1.5745007620534555 
+            text = "C2" 
+        intervals [5]:
+            xmin = 1.5745007620534555 
+            xmax = 1.63486226383489 
+            text = "V2" 
+        intervals [6]:
+            xmin = 1.63486226383489 
+            xmax = 2.5683207585408354 
+            text = "" 
+    item [4]:
+        class = "IntervalTier" 
+        name = "acc" 
+        xmin = 0 
+        xmax = 2.5683207585408354 
+        intervals: size = 3 
+        intervals [1]:
+            xmin = 0 
+            xmax = 1.2310019514995645 
+            text = "" 
+        intervals [2]:
+            xmin = 1.2310019514995645 
+            xmax = 1.5299422381713725 
+            text = "accented" 
+        intervals [3]:
+            xmin = 1.5299422381713725 
+            xmax = 2.5683207585408354 
+            text = "" 
+    item [5]:
+        class = "TextTier" 
+        name = "tones" 
+        xmin = 0 
+        xmax = 2.5683207585408354 
+        points: size = 2 
+        points [1]:
+            number = 1.2823126838812309 
+            mark = "L" 
+        points [2]:
+            number = 1.4642801795346543 
+            mark = "H" 

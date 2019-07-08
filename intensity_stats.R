@@ -1,17 +1,17 @@
-#############################
+##############################
 ## Prominence Marking in PD ##
-##           PLOS ONE       ##
-## 04.01.2018 - Tabea Thies ##
+##     Neuropsychologia     ##
+## 08.07.2018 - Tabea Thies ##
 ##############################
 
 ## Analysis of intensity measures
 
 ## (1) Mean intensity
-## (2) Statistical anaylses
+## (2) Statistical anaylses with VIF's for fixed factors (collinearity testing)
 ## (3) Testing correlation with and without outlier (TMT)
 
 ## insert working directory
-setwd("C:/Users/Tabea Thies/Desktop/Phonetik Institut/Paper_Article/KUS_Studie_PD_Daten/Versionen Paper_2nd try_Neuropsychologia/Data")
+setwd("")
 
 ## read data file (csv)
 data=read.csv("intensity.csv",header= T, strip.white=TRUE)
@@ -61,28 +61,6 @@ levels(data[,"TMTA"]) <- list("20" = "P01", "80" = "P02",
 
 ## conert factor to numeric
 data$TMTA = as.numeric(as.character(data$TMTA))
-
-## neuen Faktor erstellen: TMT B
-
-data[,"TMTB"] <- data[,"speaker"]
-## Level umbenennen
-levels(data[,"TMTB"]) <- list("10" = "P01", "50" = "P02",
-                              "70" = "P03", "20" = "P04", "10" = "P05", 
-                              "10" = "P06", "10" = "P07",
-                              "10" = "P08", "40" = "P09", "10" = "P10",
-                              "70" = "P11", "10" = "P12", "50" = "P13",
-                              "10" = "P14", "50" = "P15", "40" = "P16",
-                              "90" = "P17", "10" = "P18",  "NA" = "P19",
-                              "30" = "C01", "90" = "C02",
-                              "80" = "C03", "90" = "C04", "80" = "C05", 
-                              "10" = "C06", "90" = "C07", "70" = "C08",
-                              "20" = "C09", "30" = "C10", "90" = "C11",
-                              "90" = "C12", "90" = "C13", "90" = "C14",
-                              "90" = "C15", "20" = "C16", "50" = "C17",
-                              "40" = "C18", "90" = "C19")
-
-## conert factor to numeric
-data$TMTB = as.numeric(as.character(data$TMTB))
 
 
 ## neuen Faktor erstellen: TMT diff
@@ -135,28 +113,6 @@ levels(data[,"TMTdiff2"]) <- list("76" = "P01", "51" = "P02",
 data$TMTdiff2 = as.numeric(as.character(data$TMTdiff2))
 
 
-## neuen Faktor erstellen: TMT Quatient B/A
-
-data[,"TMTquo"] <- data[,"speaker"]
-## Level umbenennen
-levels(data[,"TMTquo"]) <- list("2.90" = "P01", "2.89" = "P02",
-                                  "4.05" = "P03", "1.70" = "P04", "4.41" = "P05", 
-                                  "3.08" = "P06", "2.90" = "P07",
-                                  "3.80" = "P08", "1.43" = "P09", "2.36" = "P10",
-                                  "2.27" = "P11", "1.93" = "P12", "4.04" = "P13",
-                                  "9.91" = "P14", "1.41" = "P15", "2.23" = "P16",
-                                  "1.89" = "P17", "3.14" = "P18",  "NA" = "P19",
-                                  "2.28" = "C01", "2.13" = "C02",
-                                  "2.51" = "C03", "2.75" = "C04", "2.50" = "C05", 
-                                  "2.83" = "C06", "2.73" = "C07", "1.64" = "C08",
-                                  "1.96" = "C09", "2.43" = "C10", "2.11" = "C11",
-                                  "1.26" = "C12", "1.90" = "C13", "1.41" = "C14",
-                                  "2.30" = "C15", "2.29" = "C16", "2.17" = "C17",
-                                  "3.94" = "C18", "1.44" = "C19")
-
-## conert factor to numeric
-data$TMTquo = as.numeric(as.character(data$TMTquo))
-
 ## neuen Faktor erstellen: BTA
 
 data[,"BTA"] <- data[,"speaker"]
@@ -201,64 +157,40 @@ levels(data[,"digitspan"]) <- list("14" = "P01", "14" = "P02",
 ## conert factor to numeric
 data$digitspan = as.numeric(as.character(data$digitspan))
 
-## neuen Faktor erstellen: verbal fluency
-
-data[,"verbalf"] <- data[,"speaker"]
-## Level umbenennen
-levels(data[,"verbalf"]) <- list("23" = "P01", "26" = "P02",
-                                   "23" = "P03", "35" = "P04", "40" = "P05", 
-                                   "22" = "P06", "10" = "P07",
-                                   "17" = "P08", "15" = "P09", "32" = "P10",
-                                   "16" = "P11", "20" = "P12", "10" = "P13",
-                                   "18" = "P14", "20" = "P15", "18" = "P16",
-                                   "23" = "P17", "16" = "P18",  "8" = "P19",
-                                   "27" = "C01", "29" = "C02",
-                                   "21" = "C03", "29" = "C04", "25" = "C05", 
-                                   "22" = "C06", "20" = "C07", "20" = "C08",
-                                   "18" = "C09", "22" = "C10", "38" = "C11",
-                                   "38" = "C12", "19" = "C13", "19" = "C14",
-                                   "27" = "C15", "22" = "C16", "20" = "C17",
-                                   "18" = "C18", "20" = "C19")
-
-## conert factor to numeric
-data$verbalf = as.numeric(as.character(data$verbalf))
-
-## neuen Faktor erstellen: phonematic fluency
-
-data[,"phonf"] <- data[,"speaker"]
-## Level umbenennen
-levels(data[,"phonf"]) <- list("7" = "P01", "16" = "P02",
-                                 "14" = "P03", "10" = "P04", "12" = "P05", 
-                                 "14" = "P06", "11" = "P07",
-                                 "8" = "P08", "11" = "P09", "20" = "P10",
-                                 "7" = "P11", "14" = "P12", "2" = "P13",
-                                 "25" = "P14", "18" = "P15", "4" = "P16",
-                                 "28" = "P17", "5" = "P18",  "11" = "P19",
-                                 "18" = "C01", "10" = "C02",
-                                 "12" = "C03", "21" = "C04", "10" = "C05", 
-                                 "16" = "C06", "14" = "C07", "20" = "C08",
-                                 "17" = "C09", "12" = "C10", "12" = "C11",
-                                 "18" = "C12", "18" = "C13", "22" = "C14",
-                                 "13" = "C15", "12" = "C16", "20" = "C17",
-                                 "16" = "C18", "18" = "C19")
-
-## conert factor to numeric
-data$phonf = as.numeric(as.character(data$phonf))
 
 ## z-standadise parameters of potential further influencing factors (UPDRS, TMT, disease duration, intelligibility)
 
 data$TMTdiff_z <- scale(data$TMTdiff)
 data$TMTdiff2_z <- scale(data$TMTdiff2)
 data$TMTA_z <- scale(data$TMTA)
-data$TMTB_z <- scale(data$TMTB)
-data$TMTquo_z <- scale(data$TMTquo)
 data$BTA_z <- scale(data$BTA)
 data$digitspan_z <- scale(data$digitspan)
-data$verbalf_z <- scale(data$verbalf)
-data$phonf_z <- scale(data$phonf)
 data$UPDRS_z <- scale(data$UPDRS)
 data$Dur_z <- scale(data$Dur)
 data$Intell_z <- scale(data$Intell)
+
+
+############################
+## check for collinearity ##
+##  between fixed factors ##
+############################
+
+## Variation Influence Factor (vif)
+
+vif.lme <- function (fit) {
+  ## adapted from rms::vif
+  v <- vcov(fit)
+  nam <- names(fixef(fit))
+  ## exclude intercepts
+  ns <- sum(1 * (nam == "Intercept" | nam == "(Intercept)"))
+  if (ns > 0) {
+    v <- v[-(1:ns), -(1:ns), drop = FALSE]
+    nam <- nam[-(1:ns)] }
+  d <- diag(v)^0.5
+  v <- diag(solve(v/(d %o% d)))
+  names(v) <- nam
+  v }
+
 
 
 ################################
@@ -278,6 +210,9 @@ intensity.acc_condition.null <- lmer(mean_vowel ~ group + 1 + (1| speaker) + (1|
 
 anova(intensity.acc_condition.full, intensity.acc_condition.null)  ## effect of accent condition X2(1) = 520.26  p < 2.2e-16 ***
 summary(intensity.acc_condition.full) ## intensity lower in unaccented vowels
+
+## collinearity
+vif.lme(intensity.group.full) ## vif = 1.004
 
 
 ############################################
@@ -300,11 +235,7 @@ patient.null <- lmer(mean_vowel ~  1 + acc_condition + (1+acc_condition|speaker)
 
 anova(patient.TMTA, patient.null) ## X2(1) = 1.7576  ; p=0.1849 --> no influence of TMT A
 
-
-# influence TMT B
-patient.TMTB <- lmer(mean_vowel ~  TMTB_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
-
-anova(patient.TMTB, patient.null) ## X2(1) = 1.1136  ; p=0.2913 --> no influence of TMT B
+vif.lme(patient.TMTA) ## vif = 1.000048 
 
 
 # influence TMT diff (B-A)
@@ -313,11 +244,7 @@ patient.TMTdiff <- lmer(mean_vowel ~  TMTdiff_z + acc_condition + (1+acc_conditi
 anova(patient.TMTdiff, patient.null) ## X2(1) = 8.1019  ; p=0.004422 ** --> influence of TMT difference
 summary(patient.TMTdiff) ## higher intensity if slower TMT
 
-
-# influence TMT quatient (B/A)
-patient.TMTquo <- lmer(mean_vowel ~  TMTquo_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
-
-anova(patient.TMTquo, patient.null) ## X2(1) = 0.3592 ; p=0.5489 --> no influence of TMT difference
+vif.lme(patient.TMTdiff) ## vif =  1.000981
 
 
 # influence BTA
@@ -325,52 +252,42 @@ patient.BTA <- lmer(mean_vowel ~  BTA_z + acc_condition + (1+acc_condition|speak
 
 anova(patient.BTA, patient.null) ## X2(1) = 2.496 ; p=0.1141 --> no influence of BTA
 
+vif.lme(patient.BTA) ## vif =  1.000645
+
 
 # influencce digit span
 patient.DS <- lmer(mean_vowel ~  digitspan_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
 
 anova(patient.DS, patient.null) ## X2(1) = 0.3797 ; p=0.5377 --> no influence of digit span
 
-# influencce verbal fluency
-patient.verb <- lmer(mean_vowel ~  verbalf_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
-
-anova(patient.verb, patient.null) ## X2(1) = 1.3637 ; p=0.2429 --> no influence of verbal fluency
-
-# influencce phonematic fluency
-patient.phon<- lmer(mean_vowel ~  phonf_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
-
-anova(patient.phon, patient.null) ## X2(1) = 2.4139 ; p=0.0.1203 --> no influence of phonematic fluency
-
-
-## influence trail making test (OLD !!!)
-patient.TMT <- lmer(mean_vowel ~  TMT2_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
-patient.null <- lmer(mean_vowel ~  1 + acc_condition + (1+acc_condition|speaker)+ (1|word), data = na.exclude(PAT), REML=FALSE)
-
-anova(patient.TMT, patient.null) ## X2(1)=8.1019 ; p=0.004422 ** --> influence of TMT
-summary(patient.TMT)
+vif.lme(patient.DS) ## vif =  1.000246
 
 ## influence duration of disease
 patient.Dur <- lmer(mean_vowel ~  Dur_z + acc_condition + (1+acc_condition |speaker)+ (1|word) , data = na.exclude(PAT),  REML=FALSE)
 
 anova(patient.Dur, patient.null) ## X2(1)=0.1181; p=0.7311 --> no influence of duration 
 
+vif.lme(patient.Dur) ## vif =  1.000014
 
 ## influence of UPDRS
 patient.UPDRS <- lmer(mean_vowel ~  UPDRS_z + acc_condition + (1+acc_condition |speaker)+ (1|word), data = na.exclude(PAT),  REML=FALSE)
 
 anova(patient.UPDRS, patient.null) ## X2(1)=0.0148  ; p=0.9033 --> no influence of motor impairment
 
+vif.lme(patient.UPDRS) ## vif =  1.000004
 
 ## influence of intelligibility rating
 patient.intell <- lmer(mean_vowel ~  Intell_z + acc_condition + (1+acc_condition |speaker)+ (1|word), data = na.exclude(PAT),  REML=FALSE)
 
 anova(patient.intell, patient.null) ## X2(1)=1.5784  ; p=0.209 --> no influence of intelligibility
 
+vif.lme(patient.intell) ## vif =  1.000093
 
 
 ##############
 ## controls ##
 ##############
+
 
 ## influence TMT A
 control.TMTA <- lmer(mean_vowel ~  TMTA_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
@@ -378,58 +295,28 @@ control.null <- lmer(mean_vowel ~  1 + acc_condition + (1+acc_condition|speaker)
 
 anova(control.TMTA, control.null) ## X2(1) = 1.174  ; p= 0.2786 --> no influence of TMT A
 
-
-# influence TMT B
-control.TMTB <- lmer(mean_vowel ~  TMTB_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
-
-anova(control.TMTB, control.null) ## X2(1) = 1.2545  ; p=0.2627 --> no influence of TMT B
-
+vif.lme(control.TMTA) ## vif =  1.000088
 
 # influence TMT diff (B-A)
 control.TMTdiff <- lmer(mean_vowel ~  TMTdiff_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
 
 anova(control.TMTdiff, control.null) ## X2(1) = 0.0907  ; p=0.7633 --> no influence of TMT difference
 
-
-# influence TMT quatient (B/A)
-control.TMTquo <- lmer(mean_vowel ~  TMTquo_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
-
-anova(control.TMTquo, control.null) ## X2(1) = 0.5759 ; p=0.4479 --> no influence of TMT difference
-
+vif.lme(control.TMTdiff) ## vif =  1.000056
 
 # influence BTA
 control.BTA <- lmer(mean_vowel ~  BTA_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
 
 anova(control.BTA, control.null) ## X2(1) = 2.4227 ; p=0.1196 --> no influence of BTA
 
+vif.lme(control.BTA) ## vif =  1.000113
 
 # influencce digit span
 control.DS <- lmer(mean_vowel ~  digitspan_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
 
 anova(control.DS, control.null) ## X2(1) = 0.7346  ; p=0.3914 --> no influence of digit span
 
-
-# influencce verbal fluency
-control.verb <- lmer(mean_vowel ~  verbalf_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
-
-anova(control.verb, control.null) ## X2(1) = 1.54 ; p=0.2146 --> no influence of verbal fluency
-
-
-# influencce phonematic fluency
-control.phon<- lmer(mean_vowel ~  phonf_z + acc_condition + (1+acc_condition|speaker)+ (1|word) , data = CON,  REML=FALSE)
-
-anova(control.phon, control.null) ## X2(1) = 13.037 ; p=0.0003055 *** --> influence of phonematic fluency
-summary(control.phon)
-
-
-
-
-## influence of trail making test (OLD!!)
-control.TMT <- lmer(mean_vowel ~  TMT2_z + acc_condition + (1+acc_condition |speaker)+ (1|word), data = CON,  REML=FALSE)
-control.null <- lmer(mean_vowel ~  1 + acc_condition + (1+acc_condition |speaker)+ (1|word), data = CON, REML=FALSE)
-
-anova(control.TMT, control.null) ## X2(1)=0.0907 ; p=0.0.7633 --> no influence of TMT
-
+vif.lme(control.DS) ## vif =  1.000066
 
 
 ###############################################################################################
@@ -464,26 +351,34 @@ summary(patient.TMTdiffwithout) ## AIC = 2442.2 ## --> better model fit for line
 ## --> same results with new data!
 
 
-## Correlation
+## (3) Correlation
 
 ## checking normal distribution
 ## This p-value tells you what the chances are that the sample comes from a normal distribution. 
 ## The lower this value, the smaller the chance. 
+
+## Correlation Trail Making test & intensity
 
 shapiro.test(data$TMTdiff) ## p-value < 2.2e-16 --> not normal distributed
 shapiro.test(data$TMTdiff2) ## p-value < 2.2e-16 --> not normal distributed
 
 shapiro.test(data$mean_vowel) ## p-value = 0.000597 --> not normal distributed
 
-## --> better to use non-parametric rank correlations (kenall oder spearman)
+## --> better to use non-parametric rank correlations (kenall)
+
 
 ## with outlier (PD 13)
-
-cor.test(PAT$TMTdiff_z, PAT$mean_vowel,  method = "kendall", conf.level = 0.95) ## r = 0.26
-cor.test(PAT$TMTdiff_z, PAT$mean_vowel, method = "pearson", conf.level = 0.95) ## r = 0.24
-
+cor.test(PAT$TMTdiff_z, PAT$mean_vowel,  method = "kendall", conf.level = 0.95) ## tau = 0.26, p < 2.2e-16
 
 ## without outlier
-cor.test(PAT$TMTdiff2_z, PAT$mean_vowel, method = "kendall", conf.level = 0.95) ## r = 0.29
-cor.test(PAT$TMTdiff2_z, PAT$mean_vowel, method = "pearson", conf.level = 0.95) ## r = 0.36
+cor.test(PAT$TMTdiff2_z, PAT$mean_vowel, method = "kendall", conf.level = 0.95) ## tau = 0.29, p < 2.2e-16
 
+
+## Correlation Intelligibility & intensity
+
+shapiro.test(PAT$Intell) ## p-value < 2.2e-16 --> not normal distributed
+shapiro.test(PAT$mean_vowel) ## p-value = 0.2449 -->  normal distributed
+
+## --> better to use non-parametric rank correlations (kenall)
+
+cor.test(PAT$Intell, PAT$mean_vowel,  method = "kendall", conf.level = 0.95) ## tau = 0.26, p = 1.677e-07
